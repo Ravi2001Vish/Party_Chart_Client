@@ -42,7 +42,9 @@ body {
   background: #0f172a;
   color: white;
   font-family: 'Segoe UI';
+  font-size:11px ;
 }
+
 
 .dashboard-container {
   padding: 20px;
@@ -108,4 +110,95 @@ th { background: #334155; }
 
 table {
   width: 100%;
+}
+
+.filter-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+  background: #1e1e2f;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.filter-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-group select,
+.filter-group input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #2a2a3d;
+  color: white;
+  font-size: 13px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: #4cafef;
+  box-shadow: 0 0 5px rgba(76, 175, 239, 0.5);
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-add {
+  background: linear-gradient(135deg, #4cafef, #007bff);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.2s;
+}
+
+.btn-add:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.btn-clear {
+  background: #ff4d4f;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-clear:hover {
+  background: #e63946;
+  transform: translateY(-1px);
+}
+
+tbody tr td {
+  font-size: 12px;   /* 👈 main table font */
+  padding: 6px 8px;  /* 👈 compact spacing */
+}
+
+.badge {
+  font-size: 11px;   /* 👈 badge text small */
+  padding: 3px 6px;
+}
+
+.action-buttons button {
+  font-size: 11px;
+  padding: 4px 6px;
 }

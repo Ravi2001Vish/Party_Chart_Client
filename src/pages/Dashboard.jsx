@@ -215,74 +215,124 @@ const handleClear = () => {
       {/* 🔽 FILTER */}
       <div className="filter-box">
 
-        <select value={party} onChange={(e) => setParty(e.target.value)}>
-          <option value="all">All Party</option>
-          {parties.map((p, i) => (
-            <option key={i}>{p}</option>
-          ))}
-        </select>
+  <div className="filter-group">
+    <select value={party} onChange={(e) => setParty(e.target.value)}>
+      <option value="all">All Party</option>
+      {parties.map((p, i) => (
+        <option key={i}>{p}</option>
+      ))}
+    </select>
 
-        {/* 📅 FROM */}
-        <input
-          type="date"
-          value={fromDate}
-          onChange={(e) => setFromDate(e.target.value)}
-        />
+    <input
+      type="date"
+      value={fromDate}
+      onChange={(e) => setFromDate(e.target.value)}
+    />
 
-        {/* 📅 TO */}
-        <input
-          type="date"
-          value={toDate}
-          onChange={(e) => setToDate(e.target.value)}
-        />
+    <input
+      type="date"
+      value={toDate}
+      onChange={(e) => setToDate(e.target.value)}
+    />
+  </div>
 
-        <button className="btn-add" onClick={() => navigate("/add")}>
-          <FaPlus /> Add Record
-        </button>
-<button className="btn-clear" onClick={handleClear}>
-  Clear
-</button>
-      </div>
+  <div className="filter-actions">
+    <button className="btn-add" onClick={() => navigate("/add")}>
+      <FaPlus /> Add Record
+    </button>
+
+    <button className="btn-clear" onClick={handleClear}>
+      Clear
+    </button>
+  </div>
+
+</div>
 
       {/* 📊 CHART */}
       <div className="grid">
 
-        <div className="card">
-          <h3>Seal & GPS Chalan Status</h3>
-          <Bar
-            data={sealData}
-            options={{
-              plugins: {
-                datalabels: {
-                  color: "white",
-                  anchor: "end",
-                  align: "top"
-                }
+  <div className="card">
+    <h3 style={{ fontSize: "14px" }}>Seal & GPS Chalan Status</h3>
+    <Bar
+      data={sealData}
+      options={{
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 8   // 👈 legend font small
               }
-            }}
-          />
-        </div>
-
-        <div className="card">
-          <h3>Risk Factor</h3>
-          <Bar
-            data={riskData}
-            options={{
-              plugins: {
-                datalabels: {
-                  color: "white",
-                  formatter: (v) => v > 0 ? v : ""
-                }
-              },
-              scales: {
-                x: { stacked: true },
-                y: { stacked: true }
+            }
+          },
+          datalabels: {
+            color: "white",
+            anchor: "end",
+            align: "top",
+            font: {
+              size: 8   // 👈 data labels small
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 8   // 👈 x-axis font
               }
-            }}
-          />
-        </div>
+            }
+          },
+          y: {
+            ticks: {
+              font: {
+                size: 8   // 👈 y-axis font
+              }
+            }
+          }
+        }
+      }}
+    />
+  </div>
 
-      </div>
+  <div className="card">
+    <h3 style={{ fontSize: "14px" }}>Risk Factor</h3>
+    <Bar
+      data={riskData}
+      options={{
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 8
+              }
+            }
+          },
+          datalabels: {
+            color: "white",
+            formatter: (v) => (v > 0 ? v : ""),
+            font: {
+              size: 8
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            ticks: {
+              font: { size: 8 }
+            }
+          },
+          y: {
+            stacked: true,
+            ticks: {
+              font: { size: 8 }
+            }
+          }
+        }
+      }}
+    />
+  </div>
+
+</div>
 
       {/* 📋 TABLE */}
       
