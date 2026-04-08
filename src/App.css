@@ -202,3 +202,47 @@ tbody tr td {
   font-size: 11px;
   padding: 4px 6px;
 }
+
+
+
+
+.btn-logout {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.btn-logout:hover {
+  background: #d9363e;
+}
+
+.login-box {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  background: #1e1e2f;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-box input {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+.login-box button {
+  padding: 10px;
+  background: #1890ff;
+  border: none;
+  color: white;
+  cursor: pointer;
+}

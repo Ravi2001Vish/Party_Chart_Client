@@ -30,12 +30,29 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
 
+const handleLogout = () => {
+  localStorage.removeItem("user"); // user remove
+  navigate("/login"); // login page pe bhejo
+};
+
   // 🔄 Fetch Data
-  const fetchData = async () => {
-    const res = await API.get("/");
-    setData(res.data);
-    setFiltered(res.data);
-  };
+const fetchData = async () => {
+  const res = await API.get("/");
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  let apiData = res.data;
+
+  // 🔥 MAIN FIX (ONLY THIS PART)
+  if (user && user.allowedParties) {
+    apiData = apiData.filter((item) =>
+      user.allowedParties.includes(item.party)
+    );
+  }
+
+  setData(apiData);
+  setFiltered(apiData);
+};
 
   const handleExport = () => {
   const exportData = filtered.map((d) => ({
@@ -211,7 +228,9 @@ const handleClear = () => {
     <div className="dashboard-container">
 
       <h2>🚚 Logistics Monitoring Dashboard</h2>
-
+  <button className="btn-logout" onClick={handleLogout}>
+    Logout
+  </button>
       {/* 🔽 FILTER */}
       <div className="filter-box">
 
