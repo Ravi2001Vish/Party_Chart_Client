@@ -10,7 +10,7 @@ export default function Login({ onLogin }) {
 const navigate = useNavigate();
   const handleLogin = async () => {
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch("https://party-chart-server.onrender.com/api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

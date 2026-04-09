@@ -40,6 +40,7 @@ const fetchData = async () => {
   const res = await API.get("/");
 
   const user = JSON.parse(localStorage.getItem("user"));
+  
 
   let apiData = res.data;
 
