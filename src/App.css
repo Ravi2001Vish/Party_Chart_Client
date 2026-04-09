@@ -246,3 +246,18 @@ tbody tr td {
   color: white;
   cursor: pointer;
 }
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #000;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

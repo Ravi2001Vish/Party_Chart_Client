@@ -1,16 +1,20 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
-
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // 👈 NEW
+
+  const navigate = useNavigate();
+
   const handleLogin = async () => {
+    if (loading) return; // 👈 double click avoid
+
+    setLoading(true); // 👈 start loader
+
     try {
-      const res = await fetch("https://party-chart-server.onrender.com/api", {
+      const res = await fetch("https://party-chart-server.onrender.com/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,20 +22,19 @@ const navigate = useNavigate();
         body: JSON.stringify({ username, password }),
       });
 
-
-
       const data = await res.json();
 
       if (res.ok) {
         localStorage.setItem("user", JSON.stringify(data.user));
         onLogin(data.user);
-       
-          navigate("/");
+        navigate("/");
       } else {
         alert(data.message);
       }
     } catch (err) {
       alert("Server error");
+    } finally {
+      setLoading(false); // 👈 stop loader
     }
   };
 
@@ -39,22 +42,24 @@ const navigate = useNavigate();
     <div className="login-box">
       <h2>Login</h2>
 
-   <input
-  autoComplete="off"
-  placeholder="Username"
-  value={username}
-  onChange={(e) => setUsername(e.target.value)}
-/>
+      <input
+        autoComplete="off"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
 
-<input
-  autoComplete="new-password"
-  type="password"
-  placeholder="Password"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-/>
+      <input
+        autoComplete="new-password"
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin} disabled={loading}>
+        {loading ? "Logging in..." : "Login"} {/* 👈 TEXT CHANGE */}
+      </button>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function Dashboard() {
   const [data, setData] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [party, setParty] = useState("all");
-
+const [loading, setLoading] = useState(true);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
 
@@ -37,22 +37,28 @@ const handleLogout = () => {
 
   // 🔄 Fetch Data
 const fetchData = async () => {
-  const res = await API.get("/");
+  try {
+    setLoading(true); // 👈 start loader
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  
+    const res = await API.get("/");
 
-  let apiData = res.data;
+    const user = JSON.parse(localStorage.getItem("user"));
+    let apiData = res.data;
 
-  // 🔥 MAIN FIX (ONLY THIS PART)
-  if (user && user.allowedParties) {
-    apiData = apiData.filter((item) =>
-      user.allowedParties.includes(item.party)
-    );
+    if (user && user.allowedParties) {
+      apiData = apiData.filter((item) =>
+        user.allowedParties.includes(item.party)
+      );
+    }
+
+    setData(apiData);
+    setFiltered(apiData);
+
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false); // 👈 loader stop
   }
-
-  setData(apiData);
-  setFiltered(apiData);
 };
 
   const handleExport = () => {
@@ -224,8 +230,20 @@ const handleClear = () => {
     ]
   };
   
-
+if (loading) {
   return (
+    <div style={{
+      height: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      <div className="loader"></div>
+    </div>
+  );
+}
+  return (
+    
     <div className="dashboard-container">
 
       <h2>🚚 Logistics Monitoring Dashboard</h2>
