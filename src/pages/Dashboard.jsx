@@ -43,6 +43,7 @@ const fetchData = async () => {
     const res = await API.get("/");
 
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
     let apiData = res.data;
 
     if (user && user.allowedParties) {
@@ -118,7 +119,8 @@ const fetchData = async () => {
         gps: Number(d.gps) || 0,
         low: Number(d.low) || 0,
         medium: Number(d.medium) || 0,
-        high: Number(d.high) || 0
+        high: Number(d.high) || 0,
+        good:Number(d.good) ||0
       };
     } else {
       map[key].sealedChalan += Number(d.sealedChalan) || 0;
@@ -126,6 +128,7 @@ const fetchData = async () => {
       map[key].low += Number(d.low) || 0;
       map[key].medium += Number(d.medium) || 0;
       map[key].high += Number(d.high) || 0;
+      map[key].good += Number(d.good) || 0;
 
       // latest created date
       if (new Date(d.createdAt) > new Date(map[key].createdAt)) {
